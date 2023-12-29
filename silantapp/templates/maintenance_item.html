@@ -1,0 +1,61 @@
+{% extends 'default.html' %}
+{% load auth_extras %}
+{% load bootstrap5 %}
+{% block bootstrap_css %}{% bootstrap_css %}{% bootstrap_javascript %}{% endblock bootstrap_css %}
+
+
+{% block content %}
+<h5 class="center">Данные ТО:</h5>
+<div class="center">
+    <table style="border-bottom: none; border-top: none;">
+    <tr><td>Зав. №  машины:</td><td>{{ technicalmaintenance.car }}</td></tr>
+    <tr><td>Сервисная организация:</td><td><a href="#" data-bs-toggle="modal" data-bs-target="#service_company"><b>{{ technicalmaintenance.service_company }}</b></a></td></tr>
+    <tr><td>Вид ТО:</td><td><a href="#" data-bs-toggle="modal" data-bs-target="#type_maintenance"><b>{{ technicalmaintenance.type_maintenance }}</b></a></td></tr>
+    <tr><td>Дата проведения ТО:</td><td>{{ technicalmaintenance.maintenance_date }}</td></tr>
+    <tr><td>Наработка мотто/часов:</td><td>{{ technicalmaintenance.operating_time }}</td></tr>
+    <tr><td>Номер заказа-наряда:</td><td>{{ technicalmaintenance.order }}</td></tr>
+    <tr><td>Дата заказа-наряда:</td><td>{{ technicalmaintenance.order_date }}</td></tr>
+    </table>
+</div>
+<br>
+<div class="center">
+    <a href="{% url 'technicalmaintenance' %}" class="button medium">Назад</a>
+    {% if perms.silant.change_technicalmaintenance %}
+        <a href="{{ request.get_full_path }}/edit" class="button medium">Редактировать</a>
+    {% endif %}
+    {% if perms.silant.delete_technicalmaintenance %}
+        <a href="{{ request.get_full_path }}/delete" class="button medium">Удалить</a>
+    {% endif %}
+</div>
+<div class="modal" tabindex="-1" id="service_company">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        Описание из справочника:<br><br>
+        {% if technicalmaintenance.service_company.description %}
+            {{ technicalmaintenance.service_company.description }}
+        {% else %}
+            Описание отсутствует :(
+        {% endif %}
+        <br><br><button type="button" class="button medium" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id="type_maintenance">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        Описание из справочника:<br><br>
+        {% if technicalmaintenance.type_maintenance.description %}
+            {{ technicalmaintenance.type_maintenance.description }}
+        {% else %}
+            Описание отсутствует :(
+        {% endif %}
+        <br><br><button type="button" class="button medium" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

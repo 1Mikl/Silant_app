@@ -1,0 +1,44 @@
+        <table>
+        <tr>
+            <th><a href="?order_by=factory_number">Номер машины</a><br>
+                <a href="?order_by=technique_model">Mодель техники</a></th>
+            <th><a href="?order_by=technique_model">Mодель техники</a></th>
+            <th><a href="?order_by=engine_model">Модель двигателя</a></th>
+            <th><a href="?order_by=engine_number">№ двигателя</a></th>
+            <th><a href="?order_by=transmission_model">модель трансмиссии</a></th>
+            <th><a href="?order_by=transmission_number">№ трансмиссии</a></th>
+            <th><a href="?order_by=drive_bridge_model">модель ведущего моста</a></th>
+            <th><a href="?order_by=drive_bridge_number">№ ведущего моста</a></th>
+            <th><a href="?order_by=controlled_bridge_model">модель управляемого моста</a></th>
+            <th><a href="?order_by=controlled_bridge_number">№ управляемого моста</a></th>
+            <th><a href="?order_by=delivery_agreement">договор поставки №, дата.</a></th>
+            <th><a href="?order_by=date_of_shipment_from_the_factory">Дата отгрузки с завода</a></th>
+            <th><a href="?order_by=consignee">Грузополучатель</a></th>
+            <th><a href="?order_by=delivery_address">Адрес поставки (эксплуатации)</a></th>
+            <th><a href="?order_by=equipment">Комплектация (доп. опции)</a></th>
+            <th><a href="?order_by=client">Клиент</a></th>
+            <th><a href="?order_by=service_company">Сервисная организация</a></th>
+        </tr>
+        {% for car in cars %}
+            <tr class="table_tr" >
+                <td><a href="/info/{{ car.id }}">{{ car.factory_number }}</a><br>
+                    <a href="/info/{{ car.id }}">{{ car.technique_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.technique_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.engine_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.engine_number }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.transmission_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.transmission_number }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.drive_bridge_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.drive_bridge_number }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.controlled_bridge_model }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.controlled_bridge_number }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.delivery_agreement }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.date_of_shipment_from_the_factory|date:"d.m.Y" }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.consignee }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.delivery_address }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.equipment }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.client }}</a></td>
+                <td><a href="/info/{{ car.id }}">{{ car.service_company }}</a></td>
+            </tr>
+        {% endfor %}
+        </table>

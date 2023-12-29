@@ -1,0 +1,76 @@
+{% extends 'default.html' %}
+{% load auth_extras %}
+{% load static %}
+
+
+{% block content %}
+    <script src="{% static 'js/info.js' %}"></script>
+    <div class="div_full_horizontal_content_space_around">
+        <a class="button_menu active" href="{% url 'info' %}" role="button">Машины</a>
+        <a class="button_menu" href="{% url 'technicalmaintenance' %}" role="button">ТО</a>
+        <a class="button_menu" href="{% url 'complaints' %}" role="button">Рекламации</a>
+    </div>
+    <h4 class="center">Информация о комплектации и технических<br>характеристиках вашей техники</h4>
+    {% if cars %}
+        {% if request.user|has_group:"manager" or request.user|has_group:"admin" %}
+            <div class="center">
+                <a class="button slim" href="{% url 'create_car' %}" role="button">Добавить запись</a>
+                <a class="button slim" href="{% url 'reference_book' %}" role="button">Редактор справочников</a>
+            </div>
+        {% endif %}
+        <br>
+        <table class="small_font">
+        <tr>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=factory_number'); return false" >№ машины</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=technique_model'); return false" >Mодель</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=engine_model'); return false" >Модель двигателя</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=engine_number'); return false" >№ двигателя</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=transmission_model'); return false" >Модель трансмиссии</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=transmission_number'); return false" >№ трансмиссии</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=drive_bridge_model'); return false" >Модель ведущуго моста</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=drive_bridge_number'); return false" >№ ведущего моста</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=controlled_bridge_model'); return false" >Модель управл-го моста</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=controlled_bridge_number'); return false" >№ управл-го моста</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=delivery_agreement'); return false" >Договор поставки</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=date_of_shipment_from_the_factory'); return false" >Дата отгрузки</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=consignee'); return false" >Грузополучатель</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=delivery_address'); return false" >Адрес поставки</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=equipment'); return false" >Комплектация<br>(доп. опции)</a></th>
+            <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=client'); return false" >Клиент</a><br>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=service_company'); return false" >Сервисная организация</a></th>
+        </tr>
+        {% for car in cars %}
+            <tr onclick="window.location.href='/info/{{ car.id }}'; return false" class="table_tr">
+                <td class="td_slim">{{ car.factory_number }}<br>
+                    {{ car.technique_model }}</td>
+                <td class="td_slim">{{ car.engine_model }}<br>
+                    {{ car.engine_number }}</td>
+                <td class="td_slim">{{ car.transmission_model }}<br>
+                    {{ car.transmission_number }}</td>
+                <td class="td_slim">{{ car.drive_bridge_model }}<br>
+                    {{ car.drive_bridge_number }}</td>
+                <td class="td_slim">{{ car.controlled_bridge_model }}<br>
+                    {{ car.controlled_bridge_number }}</td>
+                <td class="td_slim">{% if car.delivery_agreement %}{{ car.delivery_agreement }}{% else %}Отсутствует{% endif %}<br>
+                    {% if car.date_of_shipment_from_the_factory %}{{ car.date_of_shipment_from_the_factory|date:"d.m.Y" }}
+                    {% else %}Отсутствует{% endif %}</td>
+                <td class="td_slim">{% if car.consignee %}{{ car.consignee }}{% else %}Отсутствует{% endif %}<br>
+                    {% if car.delivery_address %}{{ car.delivery_address }}{% else %}Отсутствует{% endif %}</td>
+                <td class="td_slim">{% if car.equipment %}{{ car.equipment }}{% else %}Отсутствует{% endif %}</td>
+                <td class="td_slim">{% if car.client %}{{ car.client }}{% else %}Отсутствует{% endif %}<br>
+                    {% if car.service_company %}{{ car.service_company }}{% else %}Отсутствует{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h4 class="center">Нет записей о ваших машинах, которые соответствуют запросу.</h4>
+
+        {% if request.user|has_group:"manager" or request.user|has_group:"admin" %}
+            <div class="center">
+                <a class="button slim" href="{% url 'create_car' %}" role="button">Добавить первую запись о машине</a>
+                <a class="button slim" href="{% url 'reference_book' %}" role="button">Редактор справочников</a>
+            </div>
+        {% endif %}
+
+    {% endif %}
+{% endblock content %}

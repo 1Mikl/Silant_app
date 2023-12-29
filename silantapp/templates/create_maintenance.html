@@ -1,0 +1,30 @@
+{% extends 'default.html' %}
+{% load bootstrap5 %}
+{% block bootstrap_css %}{% bootstrap_css %}{% endblock bootstrap_css %}
+{% load auth_extras %}
+
+
+{% block content %}
+    <div class="left-right">
+        <p class="select_car">Выберите машину</p>
+        <select class="form-select" style='margin: 0 0 5px 25px;' onchange="window.location.href = this.value">
+            <option value="{{select_car.id}}">{{ select_car }}</option>
+            {% for car in cars %}
+                {% if car.id != select_car.id %}
+                    <option value="?id={{car.id}}">{{ car.factory_number }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        <div class="center">
+            {% buttons %}
+            <a class="button medium" href="{% url 'technicalmaintenance' %}" role="button">Отмена</a>
+            <button type="submit" class="button medium">Сохранить</button>
+            {% endbuttons %}
+        </div>
+    </form>
+
+{% endblock content %}

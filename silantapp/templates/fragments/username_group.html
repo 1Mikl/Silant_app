@@ -1,0 +1,17 @@
+{% load auth_extras %}
+
+
+{% if user.is_authenticated %}
+    <div class="center">
+        <div>
+            <b></b>
+            {% if request.user|has_group:"client" %}
+            {% elif request.user|has_group:"service" %}
+            {% elif request.user|has_group:"manager" %}
+            {% elif request.user|has_group:"admin" %}
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+        <div class="center"><p><b>Вы не авторизовались</b></p></div>
+{% endif %}
