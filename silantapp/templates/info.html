@@ -37,7 +37,7 @@
                 <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=delivery_address'); return false" >Адрес поставки</a></th>
             <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=equipment'); return false" >Комплектация<br>(доп. опции)</a></th>
             <th><a title="Сортировать" href="#" onclick="setOrder_by('?order_by=client'); return false" >Клиент</a><br>
-                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=service_company'); return false" >Сервисная организация</a></th>
+                <a title="Сортировать" href="#" onclick="setOrder_by('?order_by=service_company'); return false" >Сервисная компания</a></th>
         </tr>
         {% for car in cars %}
             <tr onclick="window.location.href='/info/{{ car.id }}'; return false" class="table_tr">

@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="left-right">
-        <p class="select_car">Выбери машину</p>
+        <p class="select_car">Выберите машину</p>
         <select class="form-select" style='margin: 0 0 5px 25px;' onchange="window.location.href = this.options[this.selectedIndex].value">
             <option value="{{select_car.id}}">{{ select_car }}</option>
             {% for car in cars %}

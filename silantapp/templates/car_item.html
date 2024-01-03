@@ -34,7 +34,7 @@
     <tr><td>Комплектация (доп. опции):</td><td>{% if car.equipment %}{{ car.equipment }}{% else %}Отсутствует
         {% endif %}</td></tr>
     <tr><td>Клиент:</td><td>{% if car.client %}{{ car.client }}{% else %}Отсутствует{% endif %}</td></tr>
-    <tr><td>Сервисная организация:</td><td>{% if car.service_company %}<a href="#" data-bs-toggle="modal" data-bs-target="#service_company"><b>{{ car.service_company }}</b></a>{% else %}Отсутствует
+    <tr><td>Сервисная компания:</td><td>{% if car.service_company %}<a href="#" data-bs-toggle="modal" data-bs-target="#service_company"><b>{{ car.service_company }}</b></a>{% else %}Отсутствует
         {% endif %}</td></tr>
     </table>
 </div>

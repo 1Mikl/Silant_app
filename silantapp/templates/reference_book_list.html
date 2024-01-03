@@ -5,7 +5,7 @@
 {% block content %}
     <h4 class="center">Справочник "{{ name }}"</h4>
     <div class="center">
-        {% if name == "Сервисная организация" %}
+        {% if name == "Сервисная компания" %}
             <p><b>Новая запись в справочнике появится при создании аккаунта,<br> принадлежащего к группе "service" </b></p>
         {% else %}
             <a class="button slim" style="color:red" href="{{ request.path }}{{ item.id }}create/" role="button">Создать новую запись</a>

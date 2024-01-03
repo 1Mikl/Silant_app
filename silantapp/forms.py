@@ -53,7 +53,6 @@ class UpdateMaintenancesForm(forms.ModelForm):
                    'maintenance_date': forms.NumberInput(attrs={'type': 'date'}),
                    'order_date': forms.NumberInput(attrs={'type': 'date'}),
                    'car': forms.HiddenInput(),
-                   # 'service_company': forms.widgets.Select(attrs={'disabled': 'disabled'})
                    'service_company': forms.HiddenInput()
                    }
 

@@ -402,7 +402,7 @@ class ReferenceBookList(PermissionRequiredMixin, TemplateView):
             context['name'] = "Модель управляемого моста"
             context['list'] = Steerable_bridge_model.objects.all()
         elif pk == 6:
-            context['name'] = "Сервисная организация"
+            context['name'] = "Сервисная компания"
             context['list'] = Service_company.objects.all()
         elif pk == 7:
             context['name'] = "Вид ТО"
